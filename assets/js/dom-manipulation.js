@@ -65,3 +65,61 @@ console.log(document.getElementsByTagName("ul")[0].children[0])
 
 // const element = document.querySelector("article+p")
 // console.log(element)
+
+// *********************************** DOM MANIPULATION ********************************
+const titleOfThePage = document.getElementsByTagName("h1")[0]
+console.log("Elemento h1:", titleOfThePage)
+// Leggere il testo contenuto nell'h1
+console.log("Testo dentro h1:", titleOfThePage.innerText)
+// Scrivere nuovo testo dentro l'h1?
+titleOfThePage.innerText = titleOfThePage.innerText + "CIAO A TUTTI" // <-- DOM MANIPULATION
+
+const firstParagraph = document.querySelector("article>p")
+firstParagraph.classList.add("nuova-classe") // Posso anche aggiungere nuove classi agli elementi
+console.log(firstParagraph)
+
+const paragraphsList = document.querySelectorAll("article>p")
+console.log(paragraphsList)
+// paragraphsList.classList.add("nuova-classe") <-- Non facciamoci prendere la tentazione di modificare le varie proprietà innerText/classList/ecc di ARRAY. Lo possiamo fare solo agendo sui SINGOLI OGGETTI. Se volessi andare a modificare un array di elementi, bisogna ciclare l'array
+for (let i = 0; i < paragraphsList.length; i++) {
+  paragraphsList[i].classList.add("ulteriore-classe")
+}
+
+paragraphsList[0].classList.remove("nuova-classe") // come aggiungo le classi anche posso rimuoverle
+
+paragraphsList[0].style.fontSize = "1.5em"
+
+const makeThemOrange = function () {
+  // 1. Seleziona gli elementi
+  const listItems = document.querySelectorAll("#main-menu>li")
+  // 2. Applico il colore arancione a tutti gli elementi (essendo un array dovrò ciclare!)
+  for (let index = 0; index < listItems.length; index++) {
+    const element = listItems[index]
+    element.style.color = "orange"
+  }
+}
+
+// makeThemOrange() // Se non invoco la funzione nulla succederà, le funzioni però possono essere anche associate al click di un pulsante (VEDI HTML)
+
+const makeFooterInvisible = function () {
+  // 1. Seleziono il footer
+  const footer = document.getElementById("footer")
+  // 2. Modifico il footer aggiungendogli la classe 'invisible'
+  footer.classList.toggle("invisible") // Aggiungo/tolgo la classe 'invisible'
+}
+
+const addNewListItem = function () {
+  // Per creare nuovi elementi nella pagina devo:
+  // 1. Creare l'elemento tramite createElement
+  // 1.1 Creo l'elemento vuoto
+  const newListItem = document.createElement("li") // <li></li>
+  // 1.2 Ci aggiungo del testo
+  newListItem.innerText = "NUOVO LI"
+
+  // 2. Inserire l'elemento nella pagina alla posizione desiderata
+  // Una volta che siamo soddisfatti di come abbiamo creato l'elemento, bisogna quindi inserirlo da qualche parte. La maniera più classica per fare ciò è selezionare nel DOM il suo contenitore e appendercelo dentro
+  // 2.1 Trovo il parent che nel nostro caso è l'elemento <ul> che ha id 'main-menu'
+  const ul = document.getElementById("main-menu")
+  // 2.2 Uso appendChild per aggiungere un nuovo figlio
+  ul.appendChild(newListItem)
+}

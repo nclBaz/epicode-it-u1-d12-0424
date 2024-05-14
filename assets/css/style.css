@@ -39,3 +39,15 @@ footer {
   text-align: center;
   margin: 1em auto;
 }
+
+.nuova-classe {
+  color: aquamarine;
+}
+
+.ulteriore-classe {
+  background-color: red;
+}
+
+.invisible {
+  opacity: 0;
+}
